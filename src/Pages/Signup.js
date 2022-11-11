@@ -34,6 +34,11 @@ import {
   setToast,
 } from "../utils/Authenticate";
 
+
+const initialState = {
+  name : "",
+  password : ""
+}
 export const Signup = () => {
   return <div>Signup</div>;
 };
