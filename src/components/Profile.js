@@ -21,6 +21,33 @@ export const Profile = () => {
           dispatch(profile(payload));
         }
       }, [dispatch, profileData?.length]);
-      
-  return <div>Profile</div>;
+
+  return (
+     <Box>
+      <Flex direction="row" padding="0.5rem">
+        <Box width="30%">
+          <Avatar
+            // name={profileData.username}
+            // src="https://img.icons8.com/fluency/2x/microsoft-todo-2019.png"
+            name={profileData.length !== 0 ? profileData.name : ""}
+            src={
+              profileData.length !== 0
+                ? profileData.description
+                : "https://img.icons8.com/fluency/2x/microsoft-todo-2019.png"
+            }
+          />
+        </Box>
+        <Flex direction="column" width="70%">
+          <Text fontWeight="bold" fontSize="18px">
+            {profileData.length !== 0 ? profileData.name : ""}
+          </Text>
+        </Flex>
+      </Flex>
+      <Box textAlign="right" paddingRight="0.5rem">
+        <Button color="navy" variant="link">
+          View profile
+        </Button>
+      </Box>
+    </Box>
+  );
 };
