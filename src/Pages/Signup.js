@@ -44,9 +44,15 @@ const initialState = {
   description : ""
 };
 
-const reducer = (state, action) {
+const reducer = (state, action)=>{
     switch(action.type) {
       case "name" :
+        return {...state, name : action.payload}
+
+        case "password" :
+          return {...state, password : action.payload}
+
+          case "email"
     }
 }
 
