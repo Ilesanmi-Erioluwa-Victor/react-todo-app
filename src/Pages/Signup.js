@@ -40,6 +40,8 @@ const initialState = {
   password : "",
   email : "",
   username : "",
+  mobile : "",
+  description : ""
 }
 export const Signup = () => {
   return <div>Signup</div>;
