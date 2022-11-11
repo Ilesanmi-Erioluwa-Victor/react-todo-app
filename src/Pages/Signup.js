@@ -42,6 +42,10 @@ const initialState = {
   username : "",
   mobile : "",
   description : ""
+};
+
+const reducer = (state, action) {
+  
 }
 export const Signup = () => {
   return <div>Signup</div>;
