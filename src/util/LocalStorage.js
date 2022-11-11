@@ -11,4 +11,4 @@ const saveToLocalStorage = (key, value) => {
   }
 };
 
-export {getLocalKey, saveToLocalStorage}
+export { getLocalKey, saveToLocalStorage };
