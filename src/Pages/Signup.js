@@ -64,7 +64,9 @@ const reducer = (state, action)=>{
               case "description" :
                 return {...state, description : action.payload}
 
-                default
+                default : {
+                  return state;
+                }
     }
 }
 
