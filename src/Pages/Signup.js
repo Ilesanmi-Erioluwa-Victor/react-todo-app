@@ -37,7 +37,9 @@ import {
 
 const initialState = {
   name : "",
-  password : ""
+  password : "",
+  email : "",
+  username : "",
 }
 export const Signup = () => {
   return <div>Signup</div>;
