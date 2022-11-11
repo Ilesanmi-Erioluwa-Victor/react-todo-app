@@ -56,6 +56,9 @@ const reducer = (state, action)=>{
           return {...state, email : action.payload}
 
           case "username" :
+            return {...state, username : action.payload}
+
+            case "mobile" :
     }
 }
 
