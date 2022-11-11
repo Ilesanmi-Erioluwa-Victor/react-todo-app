@@ -20,6 +20,10 @@ const reducer = ( state = initilaState, action) => {
                 case types.GET_TASKS_FAILURE:
                     return {...state, isLoading : false, isError : true}
                     
-                    case types.GET_TAG_REQUEST : 
+                    case types.GET_TAG_REQUEST :
+                        return {...state}
+                        
+                        case types.GET_TAG_SUCCESS:
+                            return{...state, isLoading : false, tag : payload}
     }
 }
