@@ -31,6 +31,13 @@ export const Login = () => {
   const [username, setUsername ] = useState("");
   const [password, setPassword ] = useState("");
   const [ eye, setEye ] = useState (false);
+
+
+  const handleEye = () => {
+    setEye((prev) => !prev)
+  }
+
+  
    return (
      <Flex minH={"100vh"} align={"center"} justify={"center"}>
        <Stack
