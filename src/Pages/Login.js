@@ -26,7 +26,11 @@ export const Login = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
+  const comingFrom = location.state?.from?.pathname || "/";
+  const [username, setUsername ] = useState("");
+  const [password, setPassword ] = useState("");
+  const [ eye, setEye ] = useState (false);
    return (
      <Flex minH={"100vh"} align={"center"} justify={"center"}>
        <Stack
