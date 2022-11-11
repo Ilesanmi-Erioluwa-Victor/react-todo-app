@@ -52,7 +52,10 @@ const reducer = (state, action)=>{
         case "password" :
           return {...state, password : action.payload}
 
-          case "email"
+          case "email" : 
+          return {...state, email : action.payload}
+
+          case "username" :
     }
 }
 
