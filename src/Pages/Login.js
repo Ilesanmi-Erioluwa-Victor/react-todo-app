@@ -37,7 +37,19 @@ export const Login = () => {
     setEye((prev) => !prev)
   }
 
-  
+  const loginHandler = () => {
+    if( username && password) {
+      const params = {
+        username,
+        password
+      };
+          dispatch(login(params, toast)).then((r) => {
+            navigate(comingFrom, { replace: true });
+          });
+    }  
+  }
+
+
    return (
      <Flex minH={"100vh"} align={"center"} justify={"center"}>
        <Stack
