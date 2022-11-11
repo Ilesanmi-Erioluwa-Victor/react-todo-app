@@ -174,6 +174,7 @@ return (
       </ModalContent>
     </Modal>
   );
-
-
 };
+
+
+export default CreateTask;
