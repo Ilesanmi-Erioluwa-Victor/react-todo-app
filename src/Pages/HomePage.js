@@ -7,7 +7,9 @@ import { getTasks } from "../Redux/AppReducer/action";
 
 export const HomePage = () => {
 const tasks = useSelector( (store) =>store.AppReducer.tasks);
-const searchParams = useSearchParams();
+const [searchParams] = useSearchParams();
+const dispatch = useDispatch();
+
 
   return <div>HomePage</div>;
 };
