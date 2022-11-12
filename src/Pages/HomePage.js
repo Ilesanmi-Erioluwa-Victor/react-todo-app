@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import TaskCard from "../Components/TaskCard";
+import {TaskCard } from "../components/TaskCard";
 import { getTasks } from "../Redux/AppReducer/action";
 
 export const HomePage = () => {
