@@ -112,6 +112,22 @@ export const EditPage = () => {
             }
           };
 
+          const updateSubTaskStatus = (value) => {
+            let newSubTaskData = subTasks.map((item) => {
+              if (value.includes(item.subTaskTitle)) {
+                return {
+                  ...item,
+                  status: true,
+                };
+              }
+              return { ...item, status: false };
+            });
+
+            dispatch(updateSubtasksList(id, { subTasks: newSubTaskData })).then(
+              () => dispatch(getTasks())
+            );
+          };
+
           
   return <div>EditPage</div>;
 };
