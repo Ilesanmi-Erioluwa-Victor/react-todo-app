@@ -10,6 +10,12 @@ const tasks = useSelector( (store) =>store.AppReducer.tasks);
 const [searchParams] = useSearchParams();
 const dispatch = useDispatch();
 
-
+const filterByParamsTags = (task) => {
+  //to filter out the tags that we have based on the params
+  const tagsInTheParams = searchParams.getAll("tags");
+  if (tagsInTheParams.includes("All") || tagsInTheParams.length === 0) {
+    return task;
+  }
+}
   return <div>HomePage</div>;
 };
