@@ -32,7 +32,7 @@ import {
   checkPassword,
   checkSignupForm,
   setToast,
-} from "../utils/Authenticate";
+} from "../util/Authenticate";
 
 
 const initialState = {
@@ -83,5 +83,137 @@ export const Signup = () => {
      setEye((prev) => !prev);
    };
 
-  return <div>Signup</div>;
+   const signupHandle = () => {
+     const isEmpty = checkSignupForm(state);
+     if (!isEmpty.status) {
+       return setToast(toast, isEmpty.message, "error");
+     }
+   }
+
+  return (
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Box
+          rounded={"lg"}
+          boxShadow={"lg"}
+          p={8}
+          color={"white"}
+          borderRadius={"2rem"}
+          bg={"#436c89"}
+        >
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"} textAlign={"center"}>
+              Register
+            </Heading>
+          </Stack>
+          <Divider />
+          <Stack spacing={4}>
+            <HStack>
+              <Box>
+                <FormControl id="Name" isRequired>
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    type="text"
+                    value={state.name}
+                    onChange={(e) =>
+                      setState({ type: "name", payload: e.target.value })
+                    }
+                  />
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl id="username" isRequired>
+                  <FormLabel>Username</FormLabel>
+                  <Input
+                    type="text"
+                    value={state.username}
+                    onChange={(e) =>
+                      setState({ type: "username", payload: e.target.value })
+                    }
+                  />
+                </FormControl>
+              </Box>
+            </HStack>
+            <FormControl id="email" isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type="email"
+                value={state.email}
+                onChange={(e) =>
+                  setState({ type: "email", payload: e.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl id="password" isRequired>
+              <FormLabel>Password</FormLabel>
+              <InputGroup>
+                <Input
+                  type={eye ? "text" : "password"}
+                  value={state.password}
+                  onChange={(e) =>
+                    setState({ type: "password", payload: e.target.value })
+                  }
+                />
+                <InputRightElement h={"full"}>
+                  <Button variant={"ghost"} onClick={handleEye}>
+                    <ViewIcon />
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Box>
+              <FormControl id="mobile" isRequired>
+                <FormLabel>Mobile</FormLabel>
+                <Input
+                  type="number"
+                  value={state.mobile}
+                  onChange={(e) =>
+                    setState({ type: "mobile", payload: e.target.value })
+                  }
+                />
+              </FormControl>
+            </Box>
+            <Box>
+              <Editable defaultValue="Description">
+                <EditablePreview />
+                <EditableTextarea
+                  value={state.description}
+                  onChange={(e) =>
+                    setState({ type: "description", payload: e.target.value })
+                  }
+                />
+              </Editable>
+            </Box>
+            <Stack spacing={10} pt={2}>
+              <Button
+                loadingText="Submitting"
+                size="lg"
+                bg={"#e4e7e4"}
+                color={"black"}
+                _hover={{
+                  bg: "white",
+                }}
+                onClick={signupHandle}
+              >
+                {loading ? <Spinner /> : "Register"}
+              </Button>
+            </Stack>
+            <Stack pt={6}>
+              <Text align={"center"}>
+                Already a user?{" "}
+                <RouterLink to="/login" color={"blue.400"}>
+                  Login
+                </RouterLink>
+              </Text>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
+  );
 };
