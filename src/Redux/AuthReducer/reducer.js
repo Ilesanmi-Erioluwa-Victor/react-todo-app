@@ -1,5 +1,5 @@
 import * as types from "./actionTypes";
-import { getLocalKey, saveToLocalStorage } from "../../utils/localStorage";
+import { getLocalKey, saveToLocalStorage } from "../../util/LocalStorage";
 
 const initialState = {
   isAuth: getLocalKey("token") ? true : false,
@@ -45,5 +45,6 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
 
 export { reducer };
