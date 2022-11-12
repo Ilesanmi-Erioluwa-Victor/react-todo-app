@@ -128,6 +128,33 @@ export const EditPage = () => {
             );
           };
 
-          
+           useEffect(() => {
+             if (tasks.length === 0) {
+               dispatch(getTasks());
+             }
+           }, [dispatch, tasks.length]);
+
+           useEffect(() => {
+             if (tasks) {
+               const currentTask = tasks.find((item) => item.id === Number(id));
+
+               if (currentTask) {
+                 setTaskTitle(currentTask.title);
+                 setTaskDescription(currentTask.description);
+                 setTaskStatus(currentTask.task_status);
+                 setTaskTags(currentTask.tags);
+                 setSubTasks(currentTask.subTasks);
+
+                 let data = currentTask.subTasks
+                   .filter((item) => {
+                     return item.status && item.subTaskTitle;
+                   })
+                   .map((item) => item.subTaskTitle);
+
+                 setCheckBox(data);
+               }
+             }
+           }, [id, tasks]);
+
   return <div>EditPage</div>;
 };
