@@ -70,6 +70,18 @@ const reducer = (state, action)=>{
     }
 }
 
+
 export const Signup = () => {
+   const [state, setState] = useReducer(reducer, initialState);
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
+   const toast = useToast();
+
+   const loading = useSelector((store) => store.AuthReducer.isLoading);
+   const [eye, setEye] = useState(false);
+   const handleEye = () => {
+     setEye((prev) => !prev);
+   };
+
   return <div>Signup</div>;
 };
