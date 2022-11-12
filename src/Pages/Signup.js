@@ -34,61 +34,89 @@ import {
   setToast,
 } from "../util/Authenticate";
 
-
 const initialState = {
-  name : "",
-  password : "",
-  email : "",
-  username : "",
-  mobile : "",
-  description : ""
+  name: "",
+  password: "",
+  email: "",
+  username: "",
+  mobile: "",
+  description: "",
 };
 
-const reducer = (state, action)=>{
-    switch(action.type) {
-      case "name" :
-        return {...state, name : action.payload}
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "name":
+      return { ...state, name: action.payload };
 
-        case "password" :
-          return {...state, password : action.payload}
+    case "password":
+      return { ...state, password: action.payload };
 
-          case "email" : 
-          return {...state, email : action.payload}
+    case "email":
+      return { ...state, email: action.payload };
 
-          case "username" :
-            return {...state, username : action.payload}
+    case "username":
+      return { ...state, username: action.payload };
 
-            case "mobile" :
-              return {...state, mobile : action.payload}
+    case "mobile":
+      return { ...state, mobile: action.payload };
 
-              case "description" :
-                return {...state, description : action.payload}
+    case "description":
+      return { ...state, description: action.payload };
 
-                default : {
-                  return state;
-                }
+    default: {
+      return state;
     }
-}
-
+  }
+};
 
 export const Signup = () => {
-   const [state, setState] = useReducer(reducer, initialState);
-   const dispatch = useDispatch();
-   const navigate = useNavigate();
-   const toast = useToast();
+  const [state, setState] = useReducer(reducer, initialState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toast = useToast();
 
-   const loading = useSelector((store) => store.AuthReducer.isLoading);
-   const [eye, setEye] = useState(false);
-   const handleEye = () => {
-     setEye((prev) => !prev);
-   };
+  const loading = useSelector((store) => store.AuthReducer.isLoading);
+  const [eye, setEye] = useState(false);
+  const handleEye = () => {
+    setEye((prev) => !prev);
+  };
 
-   const signupHandle = () => {
-     const isEmpty = checkSignupForm(state);
-     if (!isEmpty.status) {
-       return setToast(toast, isEmpty.message, "error");
-     }
-   }
+  const signupHandle = () => {
+    const isEmpty = checkSignupForm(state);
+    if (!isEmpty.status) {
+      return setToast(toast, isEmpty.message, "error");
+    }
+
+    const isCharacter = checkCharacter(state.name);
+    if (!isCharacter.status) {
+      return setToast(toast, isCharacter.message, "error");
+    }
+
+    const isEmail = checkEmail(state.email);
+    if (!isEmail.status) {
+      return setToast(toast, isEmail.message, "error");
+    }
+
+    const isPassword = checkPassword(state.password);
+    if (!isPassword.status) {
+      return setToast(
+        toast,
+        "Password must contain these things:",
+        "error",
+        3000,
+        isPassword.message
+      );
+    }
+
+    const isMobile = checkMobile(state.mobile);
+    if (!isMobile.status) {
+      setToast(toast, isMobile.message, "error");
+      return isMobile.status;
+    }
+    dispatch(register(state, toast)).then((r) => {
+      navigate("/login", { replace: true });
+    });
+  };
 
   return (
     <Flex
