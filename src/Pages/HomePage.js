@@ -16,6 +16,16 @@ const filterByParamsTags = (task) => {
   if (tagsInTheParams.includes("All") || tagsInTheParams.length === 0) {
     return task;
   }
+
+  const data = task.tags.filter( (tag) => {
+    if (tagsInTheParams.includes(tag)) {
+      return true;
+    }
+    return false;
+  })
+  if(data.length) {
+    return task
+  }
 }
   return <div>HomePage</div>;
 };
