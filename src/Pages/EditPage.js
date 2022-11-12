@@ -51,5 +51,67 @@ export const EditPage = () => {
       const [checkBox, setCheckBox] = useState([]);
       const [currentSubTask, setCurrentSubTask] = useState("");
       const [newTag, setNewTag] = useState("");
+
+        const deleteHandler = (title) => {
+          let newSubTasks = subTasks.filter(
+            (item) => item.subTaskTitle !== title
+          );
+          dispatch(deleteSubTask(id, { subTasks: newSubTasks })).then(() => {
+            dispatch(getTasks());
+          });
+        };
+
+         const addSubtask = (e) => {
+           e.preventDefault();
+           if (currentSubTask) {
+             const newSubTasks = [
+               ...subTasks,
+               { subTaskTitle: currentSubTask, status: false },
+             ];
+
+             //api call to add subTasks
+             dispatch(addSubTasks(id, { subTasks: newSubTasks }))
+               .then(() => dispatch(getTasks()))
+               .then(() => {
+                 setCurrentSubTask("");
+               });
+           }
+         };
+
+          const createTagHandler = () => {
+            if (newTag) {
+              //api call to add this new tags
+              dispatch(addTag(newTag)).then(() => dispatch(getTagsList()));
+            }
+          };
+
+          const updateFunc = (identifier, value) => {
+            if (identifier === "textAndDescription") {
+              dispatch(
+                updateTasks(id, {
+                  title: taskTitle,
+                  description: taskDescription,
+                })
+              ).then(() => dispatch(getTasks()));
+            } else if (identifier === "taskStatus") {
+              dispatch(
+                updateTasks(id, {
+                  task_status: value,
+                })
+              ).then((r) => {
+                if (r === UPDATE_TASK_SUCCESS) {
+                  dispatch(getTasks());
+                }
+              });
+            } else if (identifier === "taskTags") {
+              dispatch(
+                updateTasks(id, {
+                  tags: value,
+                })
+              ).then(() => dispatch(getTasks()));
+            }
+          };
+
+          
   return <div>EditPage</div>;
 };
