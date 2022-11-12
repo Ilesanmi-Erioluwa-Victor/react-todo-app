@@ -24,7 +24,7 @@ const login = (payload, toast) => (dispatch) => {
   return axios
     .post("https://masai-api-mocker.herokuapp.com/auth/login", payload)
     .then((r) => {
-      console.log(r);
+      console.log(r.data);
       setToast(toast, "Login Successful", "success");
       dispatch({ type: types.LOGIN_SUCCESS, payload: r.data.token });
     })
