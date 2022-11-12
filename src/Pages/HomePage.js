@@ -23,9 +23,113 @@ const filterByParamsTags = (task) => {
     }
     return false;
   })
+
   if(data.length) {
     return task
   }
+
+  return false;
 }
-  return <div>HomePage</div>;
+
+useEffect( ()=> {
+  if(tasks.length === 0) {
+    dispatch(getTasks())
+  }
+},[dispatch,tasks.length])
+  return (
+    <Box width="100%" paddingTop="1rem" bg={"#436c89"}>
+      <Flex justifyContent="space-around">
+        {/* Todo */}
+        <Box
+          border="1px solid rgba(255,255,255,1)"
+          borderRadius="5px"
+          width="32%"
+          height="95vh"
+          overflow="auto"
+          color="whitesmoke"
+        >
+          <Box
+            bgImage="linear-gradient(#56ab2f,#a8e063)"
+            position="sticky"
+            top="0"
+            zIndex="1"
+          >
+            <Text textAlign="center" fontWeight="bold">
+              TODO
+            </Text>
+          </Box>
+          {/* todo tasks */}
+          {tasks.length > 0 &&
+            tasks
+              .filter((item) => item.task_status === "todo")
+              .filter(filterByParamsTags)
+              .map((item) => {
+                return <TaskCard key={item.id} {...item} colorScheme="green" />;
+              })}
+        </Box>
+
+        {/* in-progress */}
+
+        <Box
+          border="1px solid rgba(255,255,255,1)"
+          width="32%"
+          borderRadius="5px"
+          height="95vh"
+          overflow="auto"
+          color="whitesmoke"
+        >
+          <Box
+            backgroundColor="yellow.700"
+            position="sticky"
+            top="0"
+            zIndex="1"
+          >
+            <Text textAlign="center" fontWeight="bold">
+              IN-PROGRESS
+            </Text>
+          </Box>
+          {/* in-progress tasks */}
+          {tasks.length > 0 &&
+            tasks
+              .filter((item) => item.task_status === "in-progress")
+              .filter(filterByParamsTags)
+              .map((item) => {
+                return (
+                  <TaskCard key={item.id} {...item} colorScheme="yellow" />
+                );
+              })}
+        </Box>
+
+        {/* Done */}
+
+        <Box
+          border="1px solid rgba(255,255,255,1)"
+          width="32%"
+          height="95vh"
+          borderRadius="5px"
+          overflow="auto"
+          color="whitesmoke"
+        >
+          <Box
+            bgImage="linear-gradient(#606c88,#004e92)"
+            position="sticky"
+            top="0"
+            zIndex="1"
+          >
+            <Text textAlign="center" fontWeight="bold">
+              DONE
+            </Text>
+          </Box>
+          {/* done tasks */}
+          {tasks.length > 0 &&
+            tasks
+              .filter((item) => item.task_status === "done")
+              .filter(filterByParamsTags)
+              .map((item) => {
+                return <TaskCard key={item.id} {...item} colorScheme="blue" />;
+              })}
+        </Box>
+      </Flex>
+    </Box>
+  );
 };
