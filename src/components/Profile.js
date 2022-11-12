@@ -8,7 +8,6 @@ export const Profile = () => {
     const dispatch = useDispatch();
 
     const profileData = useSelector((state) => state.AuthReducer?.profileData);
-    console.log(profileData);
 
       useEffect(() => {
         if (profileData?.length === 0) {

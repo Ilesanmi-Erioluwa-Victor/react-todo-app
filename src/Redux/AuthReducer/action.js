@@ -43,7 +43,6 @@ const profile = (payload) => (dispatch) => {
   };
   return axios(options)
     .then((r) => {
-      console.log("action", r.data);
       dispatch({
         type: types.PROFILE_SUCCESS,
         payload: r.data,
